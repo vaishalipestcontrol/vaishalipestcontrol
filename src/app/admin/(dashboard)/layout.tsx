@@ -11,6 +11,7 @@ const adminLinks = [
   { href: '/admin/testimonials', label: 'Testimonials', icon: 'reviews' },
   { href: '/admin/pages/about', label: 'About Page', icon: 'info' },
   { href: '/admin/contacts', label: 'Quote Requests', icon: 'mail' },
+  { href: '/admin/settings', label: 'Change Password', icon: 'lock_reset' },
 ];
 
 export default function AdminLayout({

@@ -87,8 +87,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <span className="material-symbols-outlined text-primary-container text-xl shrink-0">mail</span>
-                <a href="mailto:info@vaishalipestcontrol.com" className="text-slate-400 hover:text-white text-sm transition-colors">
-                  info@vaishalipestcontrol.com
+                <a href="mailto:info@vaishalipestcontrol.in" className="text-slate-400 hover:text-white text-sm transition-colors">
+                  info@vaishalipestcontrol.in
                 </a>
               </li>
             </ul>

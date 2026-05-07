@@ -4,8 +4,8 @@ const SMTP_HOST = process.env.SMTP_HOST
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587', 10)
 const SMTP_USER = process.env.SMTP_USER
 const SMTP_PASS = process.env.SMTP_PASS
-const SMTP_FROM = process.env.SMTP_FROM || '"Vaishali Pest Control" <no-reply@vaishalipestcontrol.com>'
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'manish@vaishalipestcontrol.com'
+const SMTP_FROM = process.env.SMTP_FROM || '"Vaishali Pest Control" <no-reply@vaishalipestcontrol.in>'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'manish@vaishalipestcontrol.in'
 
 /**
  * Returns true if the required SMTP configuration environment variables are present.

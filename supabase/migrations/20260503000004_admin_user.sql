@@ -5,7 +5,7 @@
 DO $$
 DECLARE
     user_id UUID := gen_random_uuid();
-    user_email TEXT := 'admin@vaishalipestcontrol.com';
+    user_email TEXT := 'admin@vaishalipestcontrol.in';
     user_password TEXT := 'Vaishali@2026'; -- Recommended to change this!
 BEGIN
     -- Only insert if the user doesn't already exist

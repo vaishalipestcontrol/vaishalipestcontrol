@@ -36,7 +36,7 @@ export default function LoginPage() {
                 type="email" 
                 required 
                 className="form-input pl-11 bg-white" 
-                placeholder="admin@vaishali.com"
+                placeholder="admin@vaishalipestcontrol.in"
               />
             </div>
           </div>

@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -19,7 +13,7 @@
   --color-primary-container: #22c55e;
   --color-on-primary: #ffffff;
 
-  /* Accent Orange — for urgency CTAs */
+  /* Accent Orange */
   --color-accent: #ea580c;
   --color-accent-light: #fed7aa;
 
@@ -38,7 +32,6 @@
   --color-error: #dc2626;
   --color-outline-variant: #cbd5e1;
 
-  /* WhatsApp brand green */
   --color-whatsapp: #25D366;
 }
 
@@ -47,92 +40,179 @@
   --foreground: #0f172a;
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-manrope), sans-serif;
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-manrope), sans-serif;
-}
+@layer components {
+  /* ─── Glassmorphism ─────────────────────────── */
+  .glass {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
 
-/* ─── Glassmorphism ─────────────────────────── */
-.glass {
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
+  /* ─── Shadows ───────────────────────────────── */
+  .ambient-shadow {
+    box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.08);
+  }
 
-/* ─── Shadows ───────────────────────────────── */
-.ambient-shadow {
-  box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.08);
-}
+  /* ─── Ghost Border ──────────────────────────── */
+  .ghost-border {
+    border: 1px solid rgba(203, 213, 225, 0.6);
+  }
 
-/* ─── Ghost Border ──────────────────────────── */
-.ghost-border {
-  border: 1px solid rgba(203, 213, 225, 0.6);
-}
+  /* ─── Buttons ───────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background-color: #16a34a;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+    transition: all 0.2s;
+  }
+  .btn-primary:hover {
+    background-color: #15803d;
+    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
 
-/* ─── Primary Button ────────────────────────── */
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-bold text-sm px-6 py-3 shadow-lg shadow-primary/25 hover:bg-primary-dark hover:shadow-primary/40 active:scale-[0.98] transition-all duration-200;
-}
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background-color: #ea580c;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
+    transition: all 0.2s;
+  }
+  .btn-accent:hover { background-color: #c2410c; }
+  .btn-accent:active { transform: scale(0.98); }
 
-/* ─── Accent/Orange Button ──────────────────── */
-.btn-accent {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-white font-bold text-sm px-6 py-3 shadow-lg shadow-accent/25 hover:bg-orange-700 active:scale-[0.98] transition-all duration-200;
-}
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background-color: #25D366;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    transition: all 0.2s;
+  }
+  .btn-whatsapp:hover {
+    background-color: #1ebe5d;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  }
+  .btn-whatsapp:active { transform: scale(0.98); }
 
-/* ─── WhatsApp Button ───────────────────────── */
-.btn-whatsapp {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl font-bold text-sm px-6 py-3 text-white active:scale-[0.98] transition-all duration-200;
-  background-color: #25D366;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-}
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    border: 2px solid #16a34a;
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background-color: rgba(22, 163, 74, 0.05); }
+  .btn-secondary:active { transform: scale(0.98); }
 
-.btn-whatsapp:hover {
-  background-color: #1ebe5d;
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-}
+  .btn-tertiary {
+    color: #16a34a;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-underline-offset: 4px;
+    transition: all 0.2s;
+  }
+  .btn-tertiary:hover { text-decoration: underline; }
 
-/* ─── Secondary/Outline Button ─────────────── */
-.btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary text-primary font-bold text-sm px-6 py-3 hover:bg-primary/5 active:scale-[0.98] transition-all duration-200;
-}
+  /* ─── Form Elements ─────────────────────────── */
+  .form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.375rem;
+  }
 
-/* ─── Text Link Button ──────────────────────── */
-.btn-tertiary {
-  @apply text-primary font-semibold text-sm hover:underline underline-offset-4 transition-all;
-}
+  .form-input {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    font-size: 0.875rem;
+    color: #0f172a;
+    transition: all 0.2s;
+    outline: none;
+  }
+  .form-input::placeholder { color: #94a3b8; }
+  .form-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+  }
 
-/* ─── Form Elements ─────────────────────────── */
-.form-label {
-  @apply font-sans text-sm font-semibold text-slate-700 block mb-1.5;
-}
+  /* ─── Section Label ──────────────────────────── */
+  .section-label {
+    display: block;
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
 
-.form-input {
-  @apply w-full bg-white rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm placeholder:text-slate-400;
-}
+  /* ─── Cards ──────────────────────────────────── */
+  .service-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s;
+  }
+  .service-card:hover {
+    border-color: rgba(22, 163, 74, 0.3);
+    box-shadow: 0 20px 40px rgba(22, 163, 74, 0.1);
+  }
 
-/* ─── Section Headings ──────────────────────── */
-.section-label {
-  @apply text-primary font-bold text-sm uppercase tracking-widest mb-3 block;
-}
-
-/* ─── Service Card ──────────────────────────── */
-.service-card {
-  @apply bg-white rounded-2xl p-6 border border-slate-100 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300;
-}
-
-/* ─── Feature Card ──────────────────────────── */
-.feature-card {
-  @apply bg-surface-container-low rounded-2xl p-6 border border-transparent hover:border-primary/20 transition-all;
+  .feature-card {
+    background-color: #f0fdf4;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .feature-card:hover { border-color: rgba(22, 163, 74, 0.2); }
 }
