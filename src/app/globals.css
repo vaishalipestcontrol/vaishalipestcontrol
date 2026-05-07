@@ -1,36 +1,50 @@
 @import "tailwindcss";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-heading: var(--font-manrope);
 
-  --color-primary: #006c49;
-  --color-primary-container: #10b981;
+  /* Brand Green */
+  --color-primary: #16a34a;
+  --color-primary-dark: #15803d;
+  --color-primary-light: #bbf7d0;
+  --color-primary-container: #22c55e;
   --color-on-primary: #ffffff;
-  
-  --color-secondary: #565e74;
-  --color-secondary-container: #dae2fd;
-  --color-on-secondary-container: #5c647a;
 
-  --color-surface: #faf8ff;
-  --color-surface-container-low: #f2f3ff;
+  /* Accent Orange — for urgency CTAs */
+  --color-accent: #ea580c;
+  --color-accent-light: #fed7aa;
+
+  /* Neutral surfaces */
+  --color-secondary: #64748b;
+  --color-secondary-container: #f1f5f9;
+  --color-on-secondary-container: #475569;
+
+  --color-surface: #ffffff;
+  --color-surface-container-low: #f0fdf4;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-highest: #dae2fd;
-  --color-on-surface: #131b2e;
-  --color-on-surface-variant: #3c4a42;
-  
-  --color-error: #ba1a1a;
-  --color-outline-variant: #bbcabf;
-  
-  /* Additional colors from Stitch spec */
-  --color-tertiary-container: #19aee8;
+  --color-surface-container-highest: #dcfce7;
+  --color-on-surface: #0f172a;
+  --color-on-surface-variant: #475569;
+
+  --color-error: #dc2626;
+  --color-outline-variant: #cbd5e1;
+
+  /* WhatsApp brand green */
+  --color-whatsapp: #25D366;
 }
 
 :root {
-  --background: #faf8ff;
-  --foreground: #131b2e;
+  --background: #ffffff;
+  --foreground: #0f172a;
 }
 
 body {
@@ -39,55 +53,86 @@ body {
   font-family: var(--font-inter), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  /* Subtle Grain Texture */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 150px;
-  background-attachment: fixed;
-  opacity: 0.99;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-manrope), sans-serif;
-  color: var(--color-on-surface);
 }
 
-/* Glassmorphism utility */
+/* ─── Glassmorphism ─────────────────────────── */
 .glass {
-  background-color: rgba(250, 248, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
-/* Ambient Shadow utility */
+/* ─── Shadows ───────────────────────────────── */
 .ambient-shadow {
-  box-shadow: 0 40px 60px -15px rgba(19, 27, 46, 0.05);
+  box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.08);
 }
 
-/* Ghost Border utility */
+/* ─── Ghost Border ──────────────────────────── */
 .ghost-border {
-  border: 1px solid rgba(187, 202, 191, 0.15);
+  border: 1px solid rgba(203, 213, 225, 0.6);
 }
 
-/* Base Buttons */
+/* ─── Primary Button ────────────────────────── */
 .btn-primary {
-  @apply rounded-full bg-primary text-white font-sans font-black text-xs uppercase tracking-[0.2em] px-8 py-4 shadow-xl shadow-primary/20 hover:scale-[1.02] hover:shadow-primary/40 active:scale-[0.98] transition-all;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-bold text-sm px-6 py-3 shadow-lg shadow-primary/25 hover:bg-primary-dark hover:shadow-primary/40 active:scale-[0.98] transition-all duration-200;
 }
 
+/* ─── Accent/Orange Button ──────────────────── */
+.btn-accent {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-white font-bold text-sm px-6 py-3 shadow-lg shadow-accent/25 hover:bg-orange-700 active:scale-[0.98] transition-all duration-200;
+}
+
+/* ─── WhatsApp Button ───────────────────────── */
+.btn-whatsapp {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl font-bold text-sm px-6 py-3 text-white active:scale-[0.98] transition-all duration-200;
+  background-color: #25D366;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5d;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* ─── Secondary/Outline Button ─────────────── */
 .btn-secondary {
-  @apply rounded-full bg-surface-container-highest/50 border border-outline-variant/30 text-on-surface font-sans font-bold text-xs uppercase tracking-widest px-8 py-4 hover:bg-surface-container-highest transition-all;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary text-primary font-bold text-sm px-6 py-3 hover:bg-primary/5 active:scale-[0.98] transition-all duration-200;
 }
 
+/* ─── Text Link Button ──────────────────────── */
 .btn-tertiary {
-  @apply text-primary font-bold text-sm tracking-tight border-b-2 border-transparent hover:border-primary-container transition-all pb-1;
+  @apply text-primary font-semibold text-sm hover:underline underline-offset-4 transition-all;
 }
 
-/* Form Elements */
+/* ─── Form Elements ─────────────────────────── */
 .form-label {
-  @apply font-sans text-[10px] font-black uppercase tracking-[0.15em] text-on-surface-variant/70 block mb-2 ml-1;
+  @apply font-sans text-sm font-semibold text-slate-700 block mb-1.5;
 }
 
 .form-input {
-  @apply w-full bg-white/50 backdrop-blur-sm rounded-2xl px-6 py-4 border border-outline-variant/20 focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary/40 transition-all text-sm font-medium placeholder:text-on-surface-variant/30;
+  @apply w-full bg-white rounded-xl px-4 py-3 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all text-sm placeholder:text-slate-400;
+}
+
+/* ─── Section Headings ──────────────────────── */
+.section-label {
+  @apply text-primary font-bold text-sm uppercase tracking-widest mb-3 block;
+}
+
+/* ─── Service Card ──────────────────────────── */
+.service-card {
+  @apply bg-white rounded-2xl p-6 border border-slate-100 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300;
+}
+
+/* ─── Feature Card ──────────────────────────── */
+.feature-card {
+  @apply bg-surface-container-low rounded-2xl p-6 border border-transparent hover:border-primary/20 transition-all;
 }

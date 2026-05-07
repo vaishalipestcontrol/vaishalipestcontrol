@@ -43,9 +43,24 @@ export default async function ContactsManager() {
                 <td className="p-4 font-bold text-on-surface">
                   {contact.first_name} {contact.last_name}
                 </td>
-                <td className="p-4 text-secondary">
-                  <a href={`mailto:${contact.email}`} className="text-primary hover:underline">{contact.email}</a>
-                </td>
+                 <td className="p-4 text-secondary space-y-1">
+                   <div>
+                     <a href={`mailto:${contact.email}`} className="text-primary hover:underline font-medium">{contact.email}</a>
+                   </div>
+                   {contact.phone && (
+                     <div className="flex items-center gap-2 text-xs">
+                       <a href={`tel:${contact.phone}`} className="text-slate-500 hover:text-primary transition-colors flex items-center gap-0.5">
+                         <span className="material-symbols-outlined text-[14px]">call</span>
+                         {contact.phone}
+                       </a>
+                       <span className="text-slate-300">|</span>
+                       <a href={`https://wa.me/${contact.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-emerald-500 hover:text-emerald-600 transition-colors flex items-center gap-0.5 font-bold">
+                         <span className="material-symbols-outlined text-[14px] font-normal">chat</span>
+                         WhatsApp
+                       </a>
+                     </div>
+                   )}
+                 </td>
                 <td className="p-4 text-on-surface max-w-xs">
                   <div className="font-bold truncate">{contact.concern}</div>
                   {contact.details && <div className="text-secondary text-xs truncate mt-1">{contact.details}</div>}
@@ -100,10 +115,20 @@ export default async function ContactsManager() {
             </div>
             
             <div className="space-y-3 mb-6">
-              <div className="flex items-center gap-3 text-sm text-secondary">
-                <span className="material-symbols-outlined text-lg">mail</span>
-                <a href={`mailto:${contact.email}`} className="text-primary underline">{contact.email}</a>
-              </div>
+               <div className="flex items-center gap-3 text-sm text-secondary">
+                 <span className="material-symbols-outlined text-lg">mail</span>
+                 <a href={`mailto:${contact.email}`} className="text-primary underline">{contact.email}</a>
+               </div>
+               {contact.phone && (
+                 <div className="flex items-center gap-3 text-sm text-secondary">
+                   <span className="material-symbols-outlined text-lg">call</span>
+                   <a href={`tel:${contact.phone}`} className="text-primary underline">{contact.phone}</a>
+                   <span className="text-slate-300">|</span>
+                   <a href={`https://wa.me/${contact.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold flex items-center gap-0.5">
+                     WhatsApp
+                   </a>
+                 </div>
+               )}
               <div className="flex items-start gap-3 text-sm text-on-surface">
                 <span className="material-symbols-outlined text-lg">pest_control</span>
                 <div>

@@ -15,7 +15,7 @@ export async function upsertService(formData: FormData) {
   const icon = formData.get('icon') as string
   const is_published = formData.get('is_published') === 'on'
   const featuresRaw = formData.get('features') as string
-  const features = featuresRaw ? featuresRaw.split('\n').filter(Boolean) : []
+  const features = featuresRaw ? featuresRaw.split(/\r?\n/).map(item => item.trim()).filter(Boolean) : []
 
   // Handle image upload if a new file was provided
   let image_url = formData.get('existing_image_url') as string | null

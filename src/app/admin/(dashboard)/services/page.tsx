@@ -52,6 +52,19 @@ export default async function ServicesListPage() {
               <p className="text-on-surface-variant text-sm line-clamp-2 leading-relaxed mb-2">
                 {service.short_description}
               </p>
+              
+              {/* What's Included Pills Preview */}
+              {service.features && Array.isArray(service.features) && service.features.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mt-3 mb-4">
+                  {service.features.map((feature: string, idx: number) => (
+                    <span key={idx} className="bg-green-50 text-green-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-green-100/60 flex items-center gap-1 whitespace-nowrap">
+                      <span className="material-symbols-outlined text-[10px] text-green-600">check_circle</span>
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <div className="flex items-center gap-4 text-[10px] font-bold text-secondary/60 uppercase tracking-widest">
                 <span className="flex items-center gap-1">
                   <span className="material-symbols-outlined text-xs">link</span>

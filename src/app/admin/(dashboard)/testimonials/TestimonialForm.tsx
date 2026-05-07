@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { compressImage } from '@/lib/utils/imageCompression'
 
 export default function TestimonialForm({ 
   initialData, 
@@ -11,23 +12,44 @@ export default function TestimonialForm({
 }) {
   const [loading, setLoading] = useState(false)
   const [preview, setPreview] = useState<string | null>(initialData?.avatar_url || null)
+  const [compressedFile, setCompressedFile] = useState<File | null>(null)
+  const [isCompressing, setIsCompressing] = useState(false)
 
   async function handleSubmit(formData: FormData) {
     setLoading(true)
+    if (compressedFile) {
+      formData.set('avatar', compressedFile)
+    }
     try {
       await action(formData)
-    } catch (e) {
+    } catch (e: any) {
+      // Let Next.js handle redirect errors without popping up a false alert
+      if (e?.message === 'NEXT_REDIRECT' || e?.digest?.includes('NEXT_REDIRECT')) {
+        throw e
+      }
       alert('Failed to save testimonial')
     } finally {
       setLoading(false)
     }
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      const url = URL.createObjectURL(file)
-      setPreview(url)
+      setIsCompressing(true)
+      const reader = new FileReader()
+      reader.onload = (ev) => setPreview(ev.target?.result as string)
+      reader.readAsDataURL(file)
+
+      try {
+        // Compress the avatar down to smaller dimensions suitable for profiles
+        const compressed = await compressImage(file, 400, 400, 0.8)
+        setCompressedFile(compressed)
+      } catch (error) {
+        console.error('Avatar compression failed:', error)
+      } finally {
+        setIsCompressing(false)
+      }
     }
   }
 
@@ -38,7 +60,7 @@ export default function TestimonialForm({
       <div className="flex flex-col items-center gap-4 mb-8">
         <div className="relative group">
           <div 
-            className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg bg-surface-container-highest flex items-center justify-center"
+            className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg bg-surface-container-highest flex items-center justify-center relative"
             style={{ backgroundColor: !preview ? (initialData?.avatar_color || '#4edea3') : 'transparent' }}
           >
             {preview ? (
@@ -46,13 +68,21 @@ export default function TestimonialForm({
             ) : (
               <span className="material-symbols-outlined text-4xl text-white/50">person</span>
             )}
+
+            {isCompressing && (
+              <div className="absolute inset-0 bg-white/80 flex items-center justify-center">
+                <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
           </div>
           <label className="absolute inset-0 flex items-center justify-center bg-black/40 text-white rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
             <span className="material-symbols-outlined">add_a_photo</span>
             <input type="file" name="avatar" className="hidden" accept="image/*" onChange={handleImageChange} />
           </label>
         </div>
-        <p className="text-[10px] text-secondary font-black uppercase tracking-widest">Client Profile Photo</p>
+        <p className="text-[10px] text-secondary font-black uppercase tracking-widest">
+          {isCompressing ? 'Optimizing Avatar...' : 'Client Profile Photo'}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -128,7 +158,7 @@ export default function TestimonialForm({
         />
       </div>
 
-      <div className="flex items-center gap-4 p-4 bg-surface-container-highest/30 rounded-2xl border ghost-border">
+      <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
         <label className="relative inline-flex items-center cursor-pointer">
           <input 
             type="checkbox" 
@@ -136,16 +166,25 @@ export default function TestimonialForm({
             className="sr-only peer" 
             defaultChecked={initialData ? initialData.is_published : true} 
           />
-          <div className="w-11 h-6 bg-secondary/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-          <span className="ml-3 text-sm font-bold text-on-surface uppercase tracking-widest">Published</span>
+          <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          <span className="ml-3 text-sm font-bold text-slate-700 uppercase tracking-widest">Published</span>
         </label>
-        <p className="text-[10px] text-secondary font-medium leading-tight">
+        <p className="text-[10px] text-slate-500 font-medium leading-tight">
           When published, this testimonial will be visible on the public website.
         </p>
       </div>
 
-      <button type="submit" disabled={loading} className="w-full btn-primary py-4 shadow-xl shadow-primary/20">
-        {loading ? 'SAVING...' : initialData ? 'UPDATE TESTIMONIAL' : 'CREATE TESTIMONIAL'}
+      <button type="submit" disabled={loading || isCompressing} className="w-full btn-primary py-4 shadow-xl shadow-primary/20 flex items-center justify-center gap-2">
+        {loading ? (
+          <>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            SAVING...
+          </>
+        ) : initialData ? (
+          'UPDATE TESTIMONIAL'
+        ) : (
+          'CREATE TESTIMONIAL'
+        )}
       </button>
     </form>
   )
