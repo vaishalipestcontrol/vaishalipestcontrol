@@ -56,7 +56,7 @@ export default async function AboutPage() {
           <div className="relative">
             <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-3xl" />
             <img
-              src="/images/botanical-science.png"
+              src="/images/about-team.png"
               alt="Vaishali Pest Control Team"
               className="relative rounded-3xl w-full h-auto shadow-xl"
             />
