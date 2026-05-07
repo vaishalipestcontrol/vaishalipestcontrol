@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐜 Vaishali Pest Control
 
-## Getting Started
+> **Premium, modern, and highly-optimized web application and lead-generation portal for Vaishali Pest Control.** Built with cutting-edge Next.js 15, custom high-fidelity styling tokens, secure Supabase PostgreSQL backend, and fully-automated SMTP notification systems.
 
-First, run the development server:
+---
+
+## ✨ Features & Highlights
+
+### 🎨 Visual Excellence & Design Systems
+*   **High-Fidelity Aesthetics**: Sleek modern dark mode elements combined with custom botanical & pest control clinical vector backgrounds.
+*   **Target Pest Categories**: Dedicated, beautifully styled pages for Termite, Bedbug, Mosquito, and general Pest control services.
+*   **Cinematic Hero Section**: Center-focused, high-impact branding layout featuring real-time rating badges and elegant trust metrics.
+*   **Redesigned Testimonials Section**: A premium responsive carousel highlighting customer feedback with sleek hover-state transitions.
+
+### 🛡️ Core Capabilities
+*   **Lead Capture & Validation**: Fully-responsive quote request forms requesting mandatory phone details with native mobile keyboard configurations.
+*   **Automated Communication**: Integrated Nodemailer SMTP mail systems with customized emails for:
+    *   *Customers*: Beautifully structured, branded confirmation letters detailing their request.
+    *   *Administrators*: Instant high-contrast email alerts with dedicated **"Reply via Email"** and **"Reply on WhatsApp"** quick-action buttons.
+*   **Full Admin Dashboard**: Secure authentication gating pages for contacts, services, and testimonials management.
+
+---
+
+## 🛠️ Technology Stack
+
+*   **Frontend & Routing**: [Next.js 15+](https://nextjs.org/) (App Router with dynamic server-side actions)
+*   **Styling & UI**: Custom Vanilla CSS Utilities & CSS Variables for fluid theme transitions and pixel-perfect responsiveness.
+*   **Backend & DB**: [Supabase](https://supabase.com/) (PostgreSQL Database, Auth, and secure Connection Pooling)
+*   **Automated Mail Engine**: [Nodemailer](https://nodemailer.com/) (SMTP secure dispatch)
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+├── public/                  # Static assets & custom high-res illustrations
+│   └── images/              # Hero, botanical, and trust-badges illustrations
+├── src/
+│   ├── app/                 # Next.js App Router Pages & Layouts
+│   │   ├── (marketing)/     # Customer-facing marketing routes
+│   │   │   ├── services/    # Dedicated service pages (e.g. termite-control)
+│   │   │   └── quote/       # Interactive Quote Submission Form
+│   │   ├── admin/           # Admin Dashboard routes
+│   │   │   ├── contacts/    # Lead requests manager (Desktop & Mobile views)
+│   │   │   ├── testimonials/# Testimonials review & CRUD managers
+│   │   │   └── services/    # Service pages editor
+│   │   └── globals.css      # Core Design System, tokens, and utility styles
+│   └── lib/                 # Core utilities
+│       ├── supabase/        # Database client interfaces
+│       └── mail.ts          # Advanced Nodemailer automatic mail engine
+└── supabase/                # Local database configuration & versioned schema migrations
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Prerequisites
+Ensure you have **Node.js 18+** installed on your system.
 
-## Learn More
+### 2. Installation
+Clone the repository and install dependencies:
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Environment Setup
+Create a `.env.local` file in the root directory (using the variables provided in `.env.local.example`):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```ini
+# Supabase Database Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Automated SMTP Email Configuration (Nodemailer)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-smtp-sender-email@gmail.com
+SMTP_PASS=your-smtp-app-password
+SMTP_FROM="Vaishali Pest Control" <your-smtp-sender-email@gmail.com>
+ADMIN_EMAIL=your-admin-lead-alert-recipient@gmail.com
+```
 
-## Deploy on Vercel
+### 4. Running Locally
+Start the local Next.js Turbopack development server:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to explore the live application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📦 Production Deployment
+
+### Static Code Validation
+To verify type safety and perform optimization checks before releasing:
+```bash
+npm run build
+```
+
+### Vercel / Netlify Deployment Checklist
+1. Ensure you hook your GitHub repository to your host (e.g., **Vercel** is highly recommended for Next.js 15).
+2. Configure your Environment Variables inside the host settings dashboard exactly like your `.env.local` file.
+3. Your database queries, validation hooks, and automated mail dispatch actions will work globally out of the box!
+
+---
+
+## 🛡️ License
+Distributed under the **MIT License**. Created with passion for Vaishali Pest Control.
