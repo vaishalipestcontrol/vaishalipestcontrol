@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a" />
+      <stop offset="100%" stop-color="#15803d" />
+    </linearGradient>
+  </defs>
+  <!-- Beautiful protective shield with a transparent background -->
+  <path d="M256,30 C390,30 450,80 450,210 C450,370 256,482 256,482 C256,482 62,370 62,210 C62,80 122,30 256,30 Z" fill="url(#brandGrad)" />
+  <!-- Inner white shape depicting house -->
+  <path d="M256,95 L390,210 L340,210 L340,380 L172,380 L172,210 L122,210 Z" fill="#ffffff" />
+  <!-- Inner brand green leaf -->
+  <path d="M256,170 C285,200 300,235 300,275 C300,315 280,335 256,335 C232,335 212,315 212,275 C212,235 227,200 256,170 Z" fill="url(#brandGrad)" />
+</svg>
